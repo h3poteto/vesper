@@ -1,0 +1,3 @@
+gom "github.com/ChimeraCoder/anaconda"
+gom "github.com/spf13/pflag"
+gom "gopkg.in/yaml.v2"
