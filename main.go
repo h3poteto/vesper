@@ -32,6 +32,7 @@ func main() {
 	if err != nil {
 		log.Panic(err)
 	}
+	fmt.Println("## Today's tweets\n\n")
 	fmt.Println(tweetReport)
 
 	gh := github.New(c.PersonalAccessToken)
@@ -39,6 +40,7 @@ func main() {
 	if err != nil {
 		log.Panic(err)
 	}
+	fmt.Println("## Today's issues\n\n")
 	fmt.Println(githubReport)
 }
 
