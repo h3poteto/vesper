@@ -59,7 +59,7 @@ func (t *Twitter) dailyReport(tweets []anaconda.Tweet) string {
 		tweetTime, _ := time.Parse("Mon Jan 2 15:04:05 +0000 2006", t.CreatedAt)
 		tweetTime = tweetTime.Local()
 		report = report + "> " + t.Text + "\n\n"
-		report = report + "@" + t.User.ScreenName + " - " + tweetTime.Format("Mon Jan 2 15:04 2006") + "\n\n"
+		report = report + "@" + t.User.ScreenName + " - [" + tweetTime.Format("Mon Jan 2 15:04 2006") + "](https://twitter.com/statuses/" + t.IdStr + ")\n\n"
 	}
 	return report
 }
