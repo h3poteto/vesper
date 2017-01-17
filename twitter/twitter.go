@@ -33,6 +33,7 @@ func (t *Twitter) pickup() ([]anaconda.Tweet, error) {
 	params := url.Values{}
 	params.Add("exclude_replies", "true")
 	params.Add("include_rts", "false")
+	params.Add("count", "100")
 	tl, err := t.client.GetUserTimeline(params)
 	if err != nil {
 		return nil, err

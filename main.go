@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"github.com/h3poteto/vesper/github"
 	"github.com/h3poteto/vesper/twitter"
 	flag "github.com/spf13/pflag"
 	"gopkg.in/yaml.v2"
@@ -10,10 +11,11 @@ import (
 )
 
 type config struct {
-	ConsumerKey       string `yaml:"consumer_key"`
-	ConsumerSecret    string `yaml:"consumer_secret"`
-	AccessToken       string `yaml:"access_token"`
-	AccessTokenSecret string `yaml:"access_token_secret"`
+	ConsumerKey         string `yaml:"consumer_key"`
+	ConsumerSecret      string `yaml:"consumer_secret"`
+	AccessToken         string `yaml:"access_token"`
+	AccessTokenSecret   string `yaml:"access_token_secret"`
+	PersonalAccessToken string `yaml:"personal_access_token"`
 }
 
 func main() {
@@ -26,11 +28,18 @@ func main() {
 	}
 
 	tw := twitter.New(c.ConsumerKey, c.ConsumerSecret, c.AccessToken, c.AccessTokenSecret)
-	report, err := tw.GenerateReport()
+	tweetReport, err := tw.GenerateReport()
 	if err != nil {
 		log.Panic(err)
 	}
-	fmt.Println(report)
+	fmt.Println(tweetReport)
+
+	gh := github.New(c.PersonalAccessToken)
+	githubReport, err := gh.GenerateReport()
+	if err != nil {
+		log.Panic(err)
+	}
+	fmt.Println(githubReport)
 }
 
 func initialize(configFile *string) (*config, error) {
