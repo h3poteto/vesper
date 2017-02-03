@@ -54,7 +54,7 @@ func (g *GitHub) pickup() ([]*github.Issue, error) {
 func (g *GitHub) dailyReport(issues []*github.Issue) string {
 	report := ""
 	for _, issue := range issues {
-		report = report + "[" + *issue.Repository.FullName + "] " + "[#" + strconv.Itoa(*issue.Number) + " " + *issue.Title + "](" + *issue.URL + ")\n\n"
+		report = report + "[" + *issue.Repository.FullName + "] " + "[#" + strconv.Itoa(*issue.Number) + " " + *issue.Title + "](" + *issue.HTMLURL + ")\n\n"
 	}
 	return report
 }
