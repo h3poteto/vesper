@@ -1,6 +1,7 @@
 package github
 
 import (
+	"context"
 	"github.com/google/go-github/github"
 	"golang.org/x/oauth2"
 	"strconv"
@@ -44,7 +45,9 @@ func (g *GitHub) pickup() ([]*github.Issue, error) {
 		Direction: "asc",
 		Since:     startTime,
 	}
-	issues, _, err := g.client.Issues.List(true, listOptions)
+	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+	defer cancel()
+	issues, _, err := g.client.Issues.List(ctx, true, listOptions)
 	if err != nil {
 		return nil, err
 	}
